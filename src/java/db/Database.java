@@ -1,0 +1,213 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package db;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Person;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.ScheduleEvent;
+
+/**
+ *
+ * @author mooncript
+ */
+public class Database {
+    
+    private Statement stmt = null;
+    private ResultSet res = null;
+    private ArrayList<Person> list;
+    private Connection minConnection;
+    private String type;
+    private ScheduleEvent event;
+    private Person person;
+    
+
+    public Database(String type, ScheduleEvent event) {
+        this.type = type;
+        this.event = event;
+        
+    }
+    
+    public Database(String type, Person person) {
+        this.type = type;
+        this.person = person;
+    
+    }
+    
+    
+    public Database(String type) {
+        this.type = type;
+    }
+    
+    public void databaseConnection() {
+        
+        try {
+            
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            minConnection = DriverManager
+                    .getConnection("jdbc:sqlserver://KAIBYS\\SQLEXPRESS;databaseName=Samarit;user=sa;password=Andersti29;");
+            stmt = minConnection.createStatement();
+            if (type.equals("Opret")) {
+                opretEvent();
+            }
+            
+            if (type.equals("Update")) {
+                updateEvent();
+            }
+            
+            if (type.equals("Delete")) {
+                deleteEvent();
+            }
+            if (type.equals("Opret")) {
+                createPerson();
+            }
+            
+            if (type.equals("Update")) {
+                updatePerson();
+            }
+            
+            if (type.equals("Delete")) {
+                deletePerson();
+            }
+            
+            if(type.equals("getUsers")){
+                getUsers();
+            }
+            
+        } catch (Exception e) {
+            System.out.println("fejl:  " + e.getMessage());
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (minConnection != null) {
+                    minConnection.close();
+                }
+            } catch (SQLException e) {
+                //HVEM SKAL GIVE ØL?! HVEM HAR FJERNET DETTE FRA EN CATCH ?!
+            }
+        }
+        
+    }
+    
+    public void opretEvent() throws SQLException {
+        res = stmt.executeQuery("Execute OpretEvent '"
+                + this.event.getId() + "', '" + this.event.getTitle() + "', '"
+                + this.event.getStartDate() + "', '" + this.event.getEndDate() + "';");
+    }
+    
+    public void updateEvent() throws SQLException {
+        res = stmt.executeQuery("Execute UpdateEvent '"
+                + this.event.getId() + "', '" + this.event.getTitle() + "', '"
+                + this.event.getStartDate() + "', '" + this.event.getEndDate() + "';");
+        
+    }
+    
+    ;
+    
+    public synchronized ArrayList  initiateEvent() {
+        //Dette burde også ligge inde i en metode//eller laves om til sin egen klasse, bestemmer man selv
+        ArrayList<ScheduleEvent> list = new ArrayList<>();
+        try {
+            
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            minConnection = DriverManager
+                    .getConnection("jdbc:sqlserver://KAIBYS\\SQLEXPRESS;databaseName=Samarit;user=sa;password=Andersti29;");
+            stmt = minConnection.createStatement();
+            res = stmt.executeQuery("select * from SamaritEvent;");
+            while (res.next()) {
+                ScheduleEvent event;
+                
+                DateFormat format = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
+                Date beginDate = format.parse(res.getString(3));
+                Date endDate = format.parse(res.getString(4));
+                
+                event = new DefaultScheduleEvent(res.getString(2), beginDate, endDate);
+                event.setId(res.getString(1));
+                list.add(event);
+            }
+        } catch (SQLException | ParseException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (res != null) {
+                    res.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (minConnection != null) {
+                    minConnection.close();
+                }
+            } catch (SQLException e) {
+                
+            }
+        }
+        return list;
+    }
+    
+    private void deleteEvent() throws SQLException {
+        res = stmt.executeQuery("Execute deleteEvent '" + this.event.getId() + "';");
+    }
+    
+    
+    
+    private void createPerson() throws SQLException {
+        res = stmt.executeQuery("Execute createPerson '"
+                + this.person.getFirstName() + "', '" + this.person.getMiddleName() + "', '"
+                + this.person.getLastName() + "', '" + this.person.getMail() + "', '" + this.person.getPassword()
+                + "', '" + this.person.isAdmin() + "';");
+    }
+    
+    private void updatePerson() throws SQLException {
+        res = stmt.executeQuery("Execute updatePerson '"
+                + this.person.getID() + "', '" + this.person.getFirstName()
+                + "', '" + this.person.getMiddleName() + "', '"
+                + this.person.getLastName() + "', '" + this.person.getMail() + "', '" + this.person.getPassword()
+                + "', '" + this.person.isAdmin() + "';");
+    }
+    
+    private void deletePerson() throws SQLException {
+        res = stmt.executeQuery("Execute deletePerson '" + this.person.getID() + "';");        
+    }
+    
+    private void getUsers() throws SQLException {
+        list = new ArrayList<>();
+        res = stmt.executeQuery("select * from Person;");        
+        while (res.next()) {
+            Person p = new Person(res.getInt("personId"), res.getString("firstName"),
+                    res.getString("middleName"), res.getString("lastName"), 
+                    res.getString("mail"), res.getString("userPassword"), res.getBoolean("isAdmin"));
+            list.add(p);
+        } 
+    }
+    
+    public ArrayList<Person> getUserList(){
+        return list;
+    }
+    
+    
+    
+    
+}

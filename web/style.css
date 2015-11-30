@@ -1,0 +1,64 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19-11-2015, 09:27:51
+    Author     : Morten
+*/
+h1{
+    margin: 0px;
+}
+
+#login {
+    background-color: orange;
+    height: 50px;
+    width: 150px;
+    margin: 0px;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+
+}
+
+#userPage{
+    background: yellow;
+    height: 30px;
+    width: 100%;
+}
+
+#header {
+    background-color: blue;
+    height: 60px;
+    width: 100%;
+    margin: 0px;
+    position: fixed;
+}
+.calender {
+    float: left;
+    width: 100%;
+    padding-top: 60px;
+}
+    .value {
+        width: 1000px;
+    }
+
+#content {
+    padding-top: 60px;
+
+}
+.body {
+    background-color: red;
+    margin: 0px;
+    height: 2500px;
+}
+
+.loginForm {
+    width: 180px;
+    border: solid 2px yellow;
+}
+.input {
+    width: 175px;
+    color: blue;
+}
