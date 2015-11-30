@@ -19,13 +19,15 @@ import org.primefaces.model.ScheduleModel;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.inject.Inject;
+import model.Person;
 
 @ManagedBean
 @ViewScoped
 public class ScheduleView implements Serializable {
 
     private ScheduleModel eventModel;
-    @Inject private ServiceDatabase dbService;
+    @Inject
+    private ServiceDatabase dbService;
     private ScheduleEvent event = new DefaultScheduleEvent();
 
     public ScheduleView() {
@@ -62,11 +64,11 @@ public class ScheduleView implements Serializable {
     public void addEvent(ActionEvent actionEvent) {
         if (event.getId() == null) {
             eventModel.addEvent(event);
-            dbService.databaseConnection("Opret", event);
+            dbService.databaseConnection("CreateEvent", event);
 
         } else {
             eventModel.updateEvent(event);
-            dbService.databaseConnection("Update", event);
+            dbService.databaseConnection("UpdateEvent", event);
         }
 
         event = new DefaultScheduleEvent();
@@ -74,7 +76,7 @@ public class ScheduleView implements Serializable {
 
     public void deleteEvent(ActionEvent actionEvent) {
         eventModel.deleteEvent(event);
-        dbService.databaseConnection("Delete", event);
+        dbService.databaseConnection("DeleteEvent", event);
         event = new DefaultScheduleEvent();
     }
 
@@ -98,6 +100,15 @@ public class ScheduleView implements Serializable {
         addMessage(message);
     }
 
+    public void createEventRegistration(Person person) {
+        dbService.databaseConnection("CreateEventRegistration", event, person);
+        event = new DefaultScheduleEvent();
+    }
+    
+    public void deleteEventRegistration(Person person){
+        dbService.databaseConnection("DeleteEventRegistration", event, person);
+    }
+
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
@@ -110,6 +121,18 @@ public class ScheduleView implements Serializable {
             eventModel.addEvent(e);
             e.setId(id);
         }
+    }
+    
+    public boolean isRegistered(Person person){
+        if(dbService.isRegistred("IsRegistered", event, person)){
+            createEventRegistration(person);
+            return true;
+        }
+        else {
+            deleteEventRegistration(person);
+        return false;    
+        }
+        
     }
 
 }

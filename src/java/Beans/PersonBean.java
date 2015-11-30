@@ -46,6 +46,23 @@ public class PersonBean implements Serializable {
     
     return false;
 }
+     public PersonBean(int ID, String firstName, String middleName, String lastName, String mail, String password, boolean admin) {
+        this.ID = ID;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.mail = mail;
+        this.password = password;
+        this.admin = admin;
+    }
+  
+     
+    public Person getLoggedIN(){
+        Person person = new Person(ID, firstName, middleName, lastName, mail, password, admin);
+        return person;
+    }
+    
+    
     
     
     public ArrayList<Event> getEventsByID(){

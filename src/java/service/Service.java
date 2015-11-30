@@ -54,7 +54,7 @@ public class Service implements Serializable {
             boolean admin) {
            
             Person user = new Person(firstname, middlename, lastname, mail, password, admin);
-            Database database = new Database("Opret", user);
+            Database database = new Database("CreateUser", user);
             database.databaseConnection();
     }
 
@@ -140,7 +140,5 @@ public class Service implements Serializable {
 
         return false;
     }
-    
-    
 
 }

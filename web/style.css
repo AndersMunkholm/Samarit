@@ -7,58 +7,141 @@ and open the template in the editor.
     Created on : 19-11-2015, 09:27:51
     Author     : Morten
 */
+
+/*--------- Template Page ---------*/
 h1{
     margin: 0px;
 }
+.input {
+    width: 100%;
+    height: 135%;
+    padding-top: 5%;
+    padding-bottom: 2%;
+    border-radius: 8px;
+    font-size: 38px;
+}
+.body {
+    background-color: #F9F9F9;
+    margin: 0px;
+}
+#header {
+    background-color: #3E4651;
+    height: 60px;
+    width: 100%;
+    margin: 0px;
+    position: fixed;
+    z-index: 100;
+}
+
+.topMenu{
+    float: right;
+    width: 75%;
+}
+
+.menuItem{
+    background-color: purple;
+    height: 50px;
+    width: 150px;
+    border-left: #ffff00 solid 1px;
+    margin: 0px;
+    float: right;
+    top: 0px;
+}
+
+.title_logo {
+    padding-left: 15px;
+    padding-top: 10px;
+    width: 25%;
+    color: white;
+}
+#content {
+    padding-top: 60px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    background: #f0f0f0;
+    width: 100%;
+
+    border-top: solid 1px #3E4651;
+    border-bottom: solid 1px #3E4651;
+}
+.footer_logo {
+    padding-left: 15px;
+    padding-top: 10px;
+    color: #3E4651;
+}
+
+/*--------- Login Page ---------*/
 
 #login {
     background-color: orange;
     height: 50px;
     width: 150px;
     margin: 0px;
-    position: fixed;
-    top: 0px;
-    right: 0px;
-
+    float: right;
+        
 }
 
+
+
+.loginImage {
+    width: 790px;
+    height: 325px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("images/samarit_img.jpg");
+    background-repeat: none;
+}
+.loginForm {
+    width: 50%;
+    height: 9%;
+    
+    background-color: white;
+    border: solid 1px #3E4651;
+    border-radius: 10px;
+    
+    margin-left: auto;
+    margin-right: auto;
+}
+.loginButton {
+    border: 0 none;
+    border-radius: 36px;
+  
+    padding: 12px 45px;
+    margin: 0 10px;
+  
+    cursor: pointer;
+    display: inline-block;
+  
+    background: #3E4651;
+    font-size: 14px;
+    color: #fff;
+    text-transform: none;
+  
+    transition: all 100ms ease-in-out;
+    float: right;
+}
+.loginButton:hover {
+    opacity: .7;
+}
+
+/*--------- User Page ---------*/
 #userPage{
     background: yellow;
     height: 30px;
     width: 100%;
 }
 
-#header {
-    background-color: blue;
-    height: 60px;
-    width: 100%;
-    margin: 0px;
-    position: fixed;
-}
+/*--------- Index Page ---------*/
 .calender {
     float: left;
     width: 100%;
     padding-top: 60px;
 }
-    .value {
-        width: 1000px;
-    }
 
-#content {
-    padding-top: 60px;
-
-}
-.body {
-    background-color: red;
-    margin: 0px;
-    height: 2500px;
-}
-
-.loginForm {
-    width: 180px;
-    border: solid 2px yellow;
-}
-.input {
-    width: 175px;
-    color: blue;
+.panel {
+    width: 100%;
+    border: solid 1px green;
 }

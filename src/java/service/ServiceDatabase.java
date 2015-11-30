@@ -35,9 +35,18 @@ public class ServiceDatabase {
         database.databaseConnection();
     }
     
-    public void createEventFrame(String type) {
-        //Database database = new Database(type, event);
+    public void databaseConnection(String type,  ScheduleEvent event, Person person) {
+        Database database = new Database(type, event, person);
+        database.databaseConnection();
     }
+    
+    public boolean isRegistred(String type,  ScheduleEvent event, Person person){
+        Database database = new Database(type, event, person);
+        database.databaseConnection();
+       
+        return database.getIsRegistred();
+    }
+    
     
     public ArrayList initiateEvent(){
         

@@ -10,10 +10,10 @@ and open the template in the editor.
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+    <div class="title_logo">
+          <h1>Samarit Project</h1>
+    </div>
+
     <h:body rendered="#{user.loggedIn()}">
        <div id="header">
             <div id="login">
@@ -24,6 +24,20 @@ and open the template in the editor.
                 </a>
                 <h:button value = "Logud" outcome="login"></h:button>  
             </div>
-       </div>
+           <div class ="topMenu">
+               <h:column rendered="#{user.admin}">
+              <a href="person.xhtml">
+                    <div  class="menuItem">
+                        <h3>Admin</h3>
+                    </div>
+               </a>
+                   </h:column>
+               <a href="schedule.xhtml">
+                  <div class="menuItem">
+                     <h3>Skema</h3>
+                  </div>
+               </a>
+             </div>
+           </div>
     </h:body>
 </html>
