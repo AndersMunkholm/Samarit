@@ -54,5 +54,8 @@ public class ServiceDatabase {
         //skal måske laves smart?  behøves ikke hvis man er doven
         return database.initiateEvent();
     }
+    
+    
+    
 
 }

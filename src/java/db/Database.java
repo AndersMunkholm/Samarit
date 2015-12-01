@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.EventFrame;
 import model.Person;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.ScheduleEvent;
@@ -36,6 +37,15 @@ public class Database {
     private ScheduleEvent event;
     private Person person;
     private Boolean isRegistred = null;
+    private EventFrame eventFrame;
+    
+    
+    public Database(String type, EventFrame eventFrame, Person person) {
+        this.eventFrame = eventFrame;
+        this.person = person;
+        this.type = type;
+    
+    }
     
     public Database(String type, ScheduleEvent event, Person person) {
         this.type = type;
@@ -43,10 +53,12 @@ public class Database {
         this.person = person;
 
     }
-
-    public Boolean getIsRegistred() {
-        return isRegistred;
+    
+    public Database(String type,EventFrame eventFrame) {
+        this.type = type;
+        this.eventFrame = eventFrame;
     }
+    
     
     
     public Database(String type, ScheduleEvent event) {
@@ -111,6 +123,16 @@ public class Database {
             if(type.equals("IsRegistered")){
                 isRegisteredToEvent(event, person);
             }
+            
+            if (type.equals("CreateEventFrame")) {
+                createEventFrame(eventFrame);
+            }
+            if (type.equals("CreateEventFrameRegistration")) {
+                eventFrameRegistration(eventFrame, person);
+            }
+            if (type.equals("IsEventFrameRegistration")) {
+                isEventFrameRegistration(eventFrame, person);
+            } 
 
         } catch (Exception e) {
             System.out.println("fejl:  type: " + type + " Message: " + e.getMessage());
@@ -240,10 +262,8 @@ public class Database {
       res = stmt.executeQuery("Execute IsRegistered '" + person.getID() + "', '" + event.getId() + "';");
        
       
-        System.out.println("Starter");
-        //int temp = res.getInt(1); 
-        //System.out.println(temp);
-      int  temp = 1;
+      res.next();
+      int  temp = res.getInt(1);
            System.out.print(temp);
        if(temp > 0)
         isRegistred = true;
@@ -251,4 +271,26 @@ public class Database {
         isRegistred = false; 
     }
 
+    
+    public Boolean getIsRegistred() {
+        return isRegistred;
+    }
+
+    private void createEventFrame(EventFrame eventFrame) throws SQLException {
+         res = stmt.executeQuery("Execute createEventFrame '" + eventFrame.getStartDate() + "', '" + eventFrame.getStartTime() + "', '" + eventFrame.getEndTime() +  "', '" + eventFrame.getEventId() + "';");
+       
+    }
+    
+    
+    
+    private void eventFrameRegistration(EventFrame eventFrame, Person person) throws SQLException {
+        res = stmt.executeQuery("Execute createEventFrameRegistration '" + eventFrame.getStartDate() + "', '" + eventFrame.getStartTime() + "', '" + eventFrame.getEndTime() +  "', '" + eventFrame.getEventId() + "';");
+        
+    }
+    
+    
+    private void isEventFrameRegistration(EventFrame eventFrame, Person person) throws SQLException {
+        res = stmt.executeQuery("Execute isEventFrameRegistration '" + eventFrame.getStartDate() + "', '" + eventFrame.getStartTime() + "', '" + eventFrame.getEndTime() +  "', '" + eventFrame.getEventId() + "';");
+        //lav check
+    }
 }

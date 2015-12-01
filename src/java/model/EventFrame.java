@@ -78,7 +78,7 @@ public class EventFrame {
     
     }
     
-    public String getId() {
+    public String getEventId() {
         return event.getID();
     
     }
