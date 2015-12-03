@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import model.Registration;
@@ -19,12 +20,12 @@ public class Event {
     private LocalDate startDate;
     private LocalDate endDate;
     private ArrayList<Registration> registrations = new ArrayList<Registration>();
-
+    private ArrayList<EventFrame> eventFrames;
     @Inject
     private Service service;
 
     public Event() {
-
+        this.eventFrames = new ArrayList<>();
     }
 
     public Event(String ID, String name, LocalDate startDate, LocalDate endDate) {
@@ -32,6 +33,7 @@ public class Event {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.eventFrames = new ArrayList<>();
     }
 
     /**
@@ -43,6 +45,27 @@ public class Event {
      *
      *
      */
+    
+    
+    public void createEventFrame(LocalDate startDate, LocalTime startTime, LocalTime endTime) {
+        this.eventFrames.add(new EventFrame(startDate, startTime, endTime, this));
+    
+    }
+    
+    public EventFrame getEventFrame(int index) {
+        return this.eventFrames.get(index);
+    }
+    
+    public void removeEventFrame(int index) {
+        this.eventFrames.remove(index);
+    
+    }
+    
+    public ArrayList<EventFrame> getEventFrames() {
+        return this.eventFrames;
+    }
+    
+    
 
     public String getID() {
         return ID;

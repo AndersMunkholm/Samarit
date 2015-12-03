@@ -23,6 +23,14 @@ public class EventFrame {
     private Event event = null;
     private ArrayList<Person> persons = new ArrayList<>(); 
 
+    /**
+     * 
+     * @param startDate LocalDate
+     * @param startTime LocalTime
+     * @param endTime LocalTime
+     * @param event Event
+     */
+    
     public EventFrame(LocalDate startDate, LocalTime startTime, LocalTime endTime,Event event) {
         this.startDate = startDate;
         this.event = event;
