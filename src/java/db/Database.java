@@ -13,11 +13,15 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Event;
+import model.EventFrame;
 import model.Person;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.ScheduleEvent;
@@ -37,12 +41,28 @@ public class Database {
     private ScheduleEvent event;
     private Person person;
     private Boolean isRegistred = null;
-
+    private EventFrame eventFrame;
+    private ArrayList<EventFrame> eventFrameList;
+    private Event eventModel;
+    
     public Database(String type, ScheduleEvent event, Person person) {
         this.type = type;
         this.event = event;
         this.person = person;
 
+    }
+    
+    public Database(String type, Event event) {
+        this.eventModel = event;
+        this.type = type;
+    
+    }
+    
+    
+    public Database(String type, EventFrame eventFrame) {
+        this.type = type;
+        this.eventFrame = eventFrame;
+        this.eventFrameList = new ArrayList<>();
     }
 
     public Boolean getIsRegistred() {
@@ -115,6 +135,21 @@ public class Database {
             if (type.equals("GetEventsByID")) {
            
                 getEventsByID(person);
+              
+            }
+            if (type.equals("CreateEventFrame")) {
+           
+                createEventFrame(this.eventFrame);
+              
+            }
+            if (type.equals("DeleteEventFrame")) {
+           
+                deleteEventFrame(this.eventFrame);
+              
+            }
+            if (type.equals("GetEventFramesEventId")) {
+           
+                getEventFramesEventId(this.eventModel);
               
             }
 
@@ -268,4 +303,40 @@ public class Database {
         return eventList;
     }
 
+    
+    public void createEventFrame(EventFrame eventFrame) throws SQLException {
+        res = stmt.executeQuery("Execute createEventFrame '" + eventFrame.getStartDate().toString() + "', '" + eventFrame.getStartTime().toString() + "', '" + eventFrame.getEndTime().toString() + "', '" + eventFrame.getEventId() + "';");
+        
+    
+    }
+    
+    public void deleteEventFrame(EventFrame eventFrame) throws SQLException {
+        res = stmt.executeQuery("Execute deleteEventFrame '" + eventFrame.getEventFrameId() + "';");
+    
+    }
+    
+    public void getEventFramesEventId(Event event) throws SQLException {
+        res = stmt.executeQuery("Execute getEventFrameEvent '" + eventFrame.getEventId() + "';");
+        while (res.next()) {
+            this.eventFrameList.add(new EventFrame(
+                    LocalDate.parse(res.getString("startDate"))
+                    ,LocalTime.parse(res.getString("startTime"))
+                    ,LocalTime.parse(res.getString("endTime"))
+                    ,event,
+                    Integer.parseInt(res.getString("eventFrameId"))));
+            
+        }
+    
+    }
+    
+    
+    public ArrayList<EventFrame> getFrameList() {
+    
+        return this.eventFrameList;
+    }
+
+    
+    
+   
+    
 }

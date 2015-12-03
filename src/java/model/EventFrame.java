@@ -38,6 +38,16 @@ public class EventFrame {
         this.endTime = endTime;
 
     }
+    
+    public EventFrame(LocalDate startDate, LocalTime startTime, LocalTime endTime,Event event, int eventFrameId) {
+        this.startDate = startDate;
+        this.event = event;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.eventFrameId = eventFrameId;
+
+    }
+    
 
     public LocalDate getStartDate() {
         return startDate;
