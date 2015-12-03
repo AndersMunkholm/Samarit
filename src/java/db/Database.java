@@ -277,16 +277,15 @@ public class Database {
     }
 
     private void createEventFrame(EventFrame eventFrame) throws SQLException {
-         res = stmt.executeQuery("Execute createEventFrame '" + eventFrame.getStartDate() + "', '" + eventFrame.getStartTime() + "', '" + eventFrame.getEndTime() +  "', '" + eventFrame.getEventId() + "';");
+         res = stmt.executeQuery("Execute createEventFrame '" + eventFrame.getStartDate().toString() + "', '" + eventFrame.getStartTime().toString() + "', '" + eventFrame.getEndTime().toString() +  "', '" + eventFrame.getEventId() + "';");
        
     }
     
     
     
     private void eventFrameRegistration(EventFrame eventFrame, Person person) throws SQLException {
-        res = stmt.executeQuery("Execute createEventFrameRegistration '" + eventFrame.getStartDate() + "', '" + eventFrame.getStartTime() + "', '" + eventFrame.getEndTime() +  "', '" + eventFrame.getEventId() + "';");
-        
-    }
+        res = stmt.executeQuery("Execute eventFrameRegistrationEvent '" + eventFrame);
+    }//do this later
     
     
     private void isEventFrameRegistration(EventFrame eventFrame, Person person) throws SQLException {
