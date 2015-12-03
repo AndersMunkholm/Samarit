@@ -19,6 +19,7 @@ import javax.inject.Inject;
 import model.Person;
 import model.Event;
 import service.Service;
+import service.ServiceDatabase;
 
    // or import javax.faces.bean.SessionScoped;
 
@@ -36,7 +37,10 @@ public class PersonBean implements Serializable {
     private String password;
     private boolean admin;
     @Inject private Service service;
+    private ServiceDatabase dbService;
+    
     public PersonBean() {
+        this.dbService = ServiceDatabase.getInstance();
     }
 
     public boolean loggedIn(){
@@ -47,6 +51,7 @@ public class PersonBean implements Serializable {
     return false;
 }
      public PersonBean(int ID, String firstName, String middleName, String lastName, String mail, String password, boolean admin) {
+        this.dbService = ServiceDatabase.getInstance();
         this.ID = ID;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -64,9 +69,8 @@ public class PersonBean implements Serializable {
     
     
     
-    
-    public ArrayList<Event> getEventsByID(){
-       return service.getEventsByUserID(ID);
+    public ArrayList<String> getEventsByID(){
+       return dbService.getEventsByUserID(getLoggedIN());
     };
     
     public void login(){

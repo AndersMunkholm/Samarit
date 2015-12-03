@@ -9,13 +9,15 @@ The admin site used for creating and managing users
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-       <link href="style.css" rel="stylesheet" type="text/css"/>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
         <title>Person CRUD</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="scheduleQuery.js" type="text/javascript"></script>
     </h:head>
     <h:body styleClass="body" rendered="#{user.admin}">
         <div id="header">
-              <ui:include src="/header.xhtml" />
+            <ui:include src="/header.xhtml" />
         </div>
         <div id="content">
             <h:form styleClass="form">
@@ -35,70 +37,70 @@ The admin site used for creating and managing users
                             <h:inputText p:placeholder="Enter Name" value="#{newUser.middleName}" styleClass="input" />
                         </td>   
                     </tr>
-                <tr>
-                    <td>
-                        <h3>*Efternavn:</h3>
-                    </td>
-                    <td>
-                        <h:inputText p:placeholder="Enter Name" value="#{newUser.lastName}" styleClass="input" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h3>*eMail:</h3>
-                    </td>
-                    <td>
-                        <h:inputText p:placeholder="Enter Name" value="#{newUser.mail}" styleClass="input" />
-                    </td>
-                    <td>
-                        <h3>*Password:</h3>
-                    </td>
-                    <td>
-                        <h:inputText p:placeholder="Enter Name" value="#{newUser.password}" styleClass="input" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h3>
-                            AdminStatus
-                        </h3>
-                    </td>
-                    <td>
-                        <h:selectBooleanCheckbox value="#{newUser.admin}"/>
-                    </td>
-                </tr>
-                     
-                <tr>
-                    <td>
-                        <h:commandButton value="#{service.userList.size()}" action="#{service.createUser(newUser.firstName, newUser.middleName, newUser.lastName, newUser.mail, newUser.password, newUser.admin)}"/>
-                    </td>
-                </tr>
-            </table>
-        </h:form>
-                <!-- A list of users and various info -->
-                <table>
-                    <h3>Brugerliste</h3>
-                     <!--updates the stats -->
-                     #{service.personStat()}
-                    <h:dataTable value="#{service.userList}" var="uuser" border="1" >
-                        <h:column>
-                            <f:facet name="header">Bruger ID</f:facet>
-                            #{uuser.ID}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Bruger Navn</f:facet>
-                            #{uuser.firstName} #{uuser.middleName} #{uuser.lastName}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Email</f:facet>
-                            #{uuser.mail}
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">Poster Taget</f:facet>
-                            #{uuser.postStat}
-                        </h:column>
-                    </h:dataTable>
+                    <tr>
+                        <td>
+                            <h3>*Efternavn:</h3>
+                        </td>
+                        <td>
+                            <h:inputText p:placeholder="Enter Name" value="#{newUser.lastName}" styleClass="input" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>*eMail:</h3>
+                        </td>
+                        <td>
+                            <h:inputText p:placeholder="Enter Name" value="#{newUser.mail}" styleClass="input" />
+                        </td>
+                        <td>
+                            <h3>*Password:</h3>
+                        </td>
+                        <td>
+                            <h:inputText p:placeholder="Enter Name" value="#{newUser.password}" styleClass="input" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>
+                                AdminStatus
+                            </h3>
+                        </td>
+                        <td>
+                            <h:selectBooleanCheckbox value="#{newUser.admin}"/>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <h:commandButton value="#{service.userList.size()}" action="#{service.createUser(newUser.firstName, newUser.middleName, newUser.lastName, newUser.mail, newUser.password, newUser.admin)}"/>
+                        </td>
+                    </tr>
                 </table>
-            </div>
+            </h:form>
+            <!-- A list of users and various info -->
+            <table>
+                <h3>Brugerliste</h3>
+                <!--updates the stats -->
+                #{service.personStat()}
+                <h:dataTable value="#{service.userList}" var="uuser" border="1" >
+                    <h:column>
+                        <f:facet name="header">Bruger ID</f:facet>
+                            #{uuser.ID}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Bruger Navn</f:facet>
+                            #{uuser.firstName} #{uuser.middleName} #{uuser.lastName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Email</f:facet>
+                            #{uuser.mail}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Poster Taget</f:facet>
+                            #{uuser.postStat}
+                    </h:column>
+                </h:dataTable>
+            </table>
+        </div>
     </h:body>
 </html>

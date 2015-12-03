@@ -55,7 +55,13 @@ public class ServiceDatabase {
         return database.initiateEvent();
     }
     
-    
-    
+     public ArrayList<String> getEventsByUserID(Person person) {
+        
+        Database database = new Database("GetEventsByID", person);
+        database.databaseConnection();
+        return database.getEventList();
+
+                
+    }
 
 }

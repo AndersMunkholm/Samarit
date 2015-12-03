@@ -1,8 +1,6 @@
-
 package model;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.inject.Inject;
 import model.Registration;
@@ -13,19 +11,20 @@ import service.Service;
  * @author Morten
  */
 public class Event {
+
     //Properties
+
     private String ID;
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
     private ArrayList<Registration> registrations = new ArrayList<Registration>();
-    private ArrayList<EventFrame> eventFrames = new ArrayList<>();
-    
-    @Inject private Service service;
-    
-    public Event()
-    {
-  
+
+    @Inject
+    private Service service;
+
+    public Event() {
+
     }
 
     public Event(String ID, String name, LocalDate startDate, LocalDate endDate) {
@@ -34,52 +33,17 @@ public class Event {
         this.startDate = startDate;
         this.endDate = endDate;
     }
- /**   
-  public boolean isEvent(int ID){
-        for(int i = 0; i<service.getEventList().size(); i++){
-            if(service.getEventList().get(i).getID() == ID ){
-                return true;
-            }
-        }
-        
-      return false;  
-    };
 
-  **/
-    
     /**
-     * 
-     * @param startDate
-     * @param endDate
-     * @param startTime
-     * @param endTime 
-     * 
-     * creates and adds an eventFrame to the event, This is a composition
+     * public boolean isEvent(int ID){ for(int i = 0;
+     * i<service.getEventList().size(); i++){
+     * if(service.getEventList().get(i).getID() == ID ){ return true; } }
+     *
+     * return false; };
+     *
+     *
      */
-  
-    public void createEventFrame(LocalDate startDate, LocalTime startTime, LocalTime endTime) {
-        this.eventFrames.add(new EventFrame(startDate, startTime, endTime, this));
-        
-    
-    }
-    
-    
-    public EventFrame getEventFrame(int index) {
-        return this.eventFrames.get(index);
-    
-    }
-    
-    
-    public void addEventFrame(EventFrame eventFrame) {
-        this.eventFrames.add(eventFrame);
-    
-    }
-    
-    public void removeEventFrame(EventFrame eventFrame) {
-        this.eventFrames.remove(eventFrame);
-    }
-  
-  
+
     public String getID() {
         return ID;
     }
@@ -112,6 +76,4 @@ public class Event {
         this.endDate = endDate;
     }
 
-
-    
 }

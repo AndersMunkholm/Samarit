@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.EventFrame;
 import model.Person;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.ScheduleEvent;
@@ -32,45 +31,34 @@ public class Database {
     private Statement stmt = null;
     private ResultSet res = null;
     private ArrayList<Person> list;
+    private ArrayList<String> eventList;
     private Connection minConnection;
     private String type;
     private ScheduleEvent event;
     private Person person;
     private Boolean isRegistred = null;
-    private EventFrame eventFrame;
-    
-    
-    public Database(String type, EventFrame eventFrame, Person person) {
-        this.eventFrame = eventFrame;
-        this.person = person;
-        this.type = type;
-    
-    }
-    
+
     public Database(String type, ScheduleEvent event, Person person) {
         this.type = type;
         this.event = event;
         this.person = person;
 
     }
-    
-    public Database(String type,EventFrame eventFrame) {
-        this.type = type;
-        this.eventFrame = eventFrame;
+
+    public Boolean getIsRegistred() {
+        return isRegistred;
     }
-    
-    
-    
+
     public Database(String type, ScheduleEvent event) {
         this.type = type;
         this.event = event;
-
+        this.eventList = new ArrayList<>();
     }
 
     public Database(String type, Person person) {
         this.type = type;
         this.person = person;
-
+        this.eventList = new ArrayList<>();
     }
 
     public Database(String type) {
@@ -111,28 +99,24 @@ public class Database {
             if (type.equals("getUsers")) {
                 getUsers();
             }
-            
-            if(type.equals("CreateEventRegistration")){
-               createEventRegistration(event, person);
+
+            if (type.equals("CreateEventRegistration")) {
+                createEventRegistration(event, person);
             }
-            
-            if(type.equals("DeleteEventRegistration")){
+
+            if (type.equals("DeleteEventRegistration")) {
                 deleteEventRegistration(event, person);
             }
-            
-            if(type.equals("IsRegistered")){
+
+            if (type.equals("IsRegistered")) {
                 isRegisteredToEvent(event, person);
             }
-            
-            if (type.equals("CreateEventFrame")) {
-                createEventFrame(eventFrame);
+
+            if (type.equals("GetEventsByID")) {
+           
+                getEventsByID(person);
+              
             }
-            if (type.equals("CreateEventFrameRegistration")) {
-                eventFrameRegistration(eventFrame, person);
-            }
-            if (type.equals("IsEventFrameRegistration")) {
-                isEventFrameRegistration(eventFrame, person);
-            } 
 
         } catch (Exception e) {
             System.out.println("fejl:  type: " + type + " Message: " + e.getMessage());
@@ -255,41 +239,33 @@ public class Database {
     }
 
     public void deleteEventRegistration(ScheduleEvent event, Person person) throws SQLException {
-        res = stmt.executeQuery("Execute DeleteEventRegistration '" + person.getID() + "', '"  + event.getId() + "';");
+        res = stmt.executeQuery("Execute DeleteEventRegistration '" + person.getID() + "', '" + event.getId() + "';");
     }
 
     public void isRegisteredToEvent(ScheduleEvent event, Person person) throws SQLException {
-      res = stmt.executeQuery("Execute IsRegistered '" + person.getID() + "', '" + event.getId() + "';");
-       
-      
-      res.next();
-      int  temp = res.getInt(1);
-           System.out.print(temp);
-       if(temp > 0)
-        isRegistred = true;
-        else
-        isRegistred = false; 
+        res = stmt.executeQuery("Execute IsRegistered '" + person.getID() + "', '" + event.getId() + "';");
+
+        res.next();
+        int temp = res.getInt(1);
+        System.out.print(temp);
+
+        if (temp > 0) {
+            isRegistred = true;
+        } else {
+            isRegistred = false;
+        }
     }
 
-    
-    public Boolean getIsRegistred() {
-        return isRegistred;
+    public void getEventsByID(Person person) throws SQLException, ParseException {
+        res = stmt.executeQuery("Execute eventsByPerson '" + person.getID() + "';" );
+        while (res.next()) {         
+            String tempEvent = "Titel: " + res.getString(2) + "\n";
+            eventList.add(tempEvent);
+        }
     }
 
-    private void createEventFrame(EventFrame eventFrame) throws SQLException {
-         res = stmt.executeQuery("Execute createEventFrame '" + eventFrame.getStartDate().toString() + "', '" + eventFrame.getStartTime().toString() + "', '" + eventFrame.getEndTime().toString() +  "', '" + eventFrame.getEventId() + "';");
-       
+    public ArrayList<String> getEventList() {
+        return eventList;
     }
-    
-    
-    
-    private void eventFrameRegistration(EventFrame eventFrame, Person person) throws SQLException {
-        res = stmt.executeQuery("Execute eventFrameRegistrationEvent '" + eventFrame);
-    }//do this later
-    
-    
-    private void isEventFrameRegistration(EventFrame eventFrame, Person person) throws SQLException {
-        res = stmt.executeQuery("Execute isEventFrameRegistration '" + eventFrame.getStartDate() + "', '" + eventFrame.getStartTime() + "', '" + eventFrame.getEndTime() +  "', '" + eventFrame.getEventId() + "';");
-        //lav check
-    }
+
 }

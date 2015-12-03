@@ -5,8 +5,6 @@
  */
 package model;
 
-import java.util.ArrayList;
-
 
 public class Person{
 
@@ -22,7 +20,6 @@ public class Person{
     private double postsTaken;
     private double postsOffered;
     private double postStat;
-    private ArrayList<EventFrame> eventFrame = new ArrayList<>();
     
     public Person() {}
     
@@ -116,18 +113,5 @@ public class Person{
         this.isAdmin = admin;
     }
     
-    
-    public void addEventFrame(EventFrame eventFrame) {
-        this.eventFrame.add(eventFrame);
-    }
-    
-    public EventFrame getEventFrame(int index) {
-        return this.eventFrame.get(index);
-    }
-    
-    
-    public void removeEventFrame(EventFrame eventFrame) {
-        this.eventFrame.remove(eventFrame);
-    }
     
 }

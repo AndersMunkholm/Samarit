@@ -28,6 +28,7 @@ public class ScheduleView implements Serializable {
     private ScheduleModel eventModel;
     @Inject
     private ServiceDatabase dbService;
+    private boolean isRegistered;
     private ScheduleEvent event = new DefaultScheduleEvent();
 
     public ScheduleView() {
@@ -124,15 +125,21 @@ public class ScheduleView implements Serializable {
     }
     
     public boolean isRegistered(Person person){
-        if(dbService.isRegistred("IsRegistered", event, person)){
+        if(!dbService.isRegistred("IsRegistered", event, person)){
             createEventRegistration(person);
+            isRegistered = true;
             return true;
         }
         else {
             deleteEventRegistration(person);
+            isRegistered = false;
         return false;    
         }
-        
+     }   
+    
+     public boolean returnIsRegistered(){
+         return isRegistered;
+    
     }
 
 }

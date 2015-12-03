@@ -3,15 +3,14 @@ package service;
 import db.Database;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 //we user javax.enterprise.context.SessionScoped because it's a CDI bean and not a JSF managed bean
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import model.Person;
 import model.Event;
-import model.EventFrame;
 import model.Registration;
+import org.primefaces.model.ScheduleEvent;
 
 @Named("service")
 @SessionScoped
@@ -28,17 +27,7 @@ public class Service implements Serializable {
         this.registrationList = new ArrayList<>();
     }
 
-    public ArrayList getEventsByUserID(int userID) {
-        ArrayList<Event> tmp = new ArrayList<Event>();
-        for (int i = 0; i < registrationList.size(); i++) {
-            if (registrationList.get(i).getPersonID() == userID) {
-                tmp.add(getEventByID(registrationList.get(i).getEventID()));
-            }
-        }
-
-        return tmp;
-
-    }
+   
 
     public ArrayList<Person> getUserList() {
         Person p = null;
@@ -141,31 +130,6 @@ public class Service implements Serializable {
         }
 
         return false;
-    }
-    
-    
-    public void createEventFrame(LocalDate startDate, LocalTime startTime, LocalTime endTime, Event event) {
-        EventFrame eventFrame = new EventFrame(startDate, startTime, endTime, event);
-        Database database = new Database("CreateEventFrame",eventFrame);
-        database.databaseConnection();
-    }
-    
-    
-    public void eventFrameRegistration(EventFrame eventFrame, Person person) {
-        
-        Database database = new Database("CreateEventFrameRegistration", eventFrame, person);
-        database.databaseConnection();
-        
-        
-    
-    }
-    
-    
-    public boolean isEventFrameRegistration(EventFrame eventFrame, Person person) {
-        Database database = new Database("IsEventFrameRegistration", eventFrame, person);
-        database.databaseConnection();
-        return database.getIsRegistred();
-    
     }
 
 }
