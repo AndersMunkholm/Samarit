@@ -80,7 +80,7 @@ public class Database {
 
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             minConnection = DriverManager
-                    .getConnection("jdbc:sqlserver://MORTEN-PC;databaseName=Samarit;user=sa;password=helloworld;");
+                    .getConnection("jdbc:sqlserver://KAIBYS\\SQLEXPRESS;databaseName=Samarit;user=sa;password=Andersti29;");
             stmt = minConnection.createStatement();
             if (type.equals("CreateEvent")) {
                 opretEvent();
@@ -106,7 +106,9 @@ public class Database {
             }
 
             if (type.equals("getUsers")) {
+                System.out.println("STARTER USER GETTER");
                 getUsers();
+                System.out.println("SLUTTER USER GETTER");
             }
 
             if (type.equals("CreateEventRegistration")) {
@@ -184,7 +186,7 @@ public class Database {
 
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             minConnection = DriverManager
-                    .getConnection("jdbc:sqlserver://MORTEN-PC;databaseName=Samarit;user=sa;password=helloworld;");
+                    .getConnection("jdbc:sqlserver://KAIBYS\\SQLEXPRESS;databaseName=Samarit;user=sa;password=Andersti29;");
             stmt = minConnection.createStatement();
             res = stmt.executeQuery("select * from SamaritEvent;");
             while (res.next()) {
@@ -251,10 +253,12 @@ public class Database {
                     res.getString("middleName"), res.getString("lastName"),
                     res.getString("mail"), res.getString("userPassword"), res.getBoolean("isAdmin"));
             list.add(p);
+            System.out.println(p);
         }
     }
 
     public ArrayList<Person> getUserList() {
+        System.out.println("RETURNING USERS");
         return list;
     }
 

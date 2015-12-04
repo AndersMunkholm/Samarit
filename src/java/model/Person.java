@@ -24,7 +24,10 @@ public class Person{
     private double postStat;
     private ArrayList<EventFrame> eventFrame;
     
-    public Person() {}
+    public Person() {
+    
+    
+    }
     
     public Person(String firstName, String middleName, String lastName, 
             String mail, String password,boolean isAdmin) {
