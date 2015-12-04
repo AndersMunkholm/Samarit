@@ -9,8 +9,10 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
     <div id="topbar_home">
         <div>
             <h1>Samarit Project</h1>
@@ -20,69 +22,70 @@ and open the template in the editor.
         <h:body rendered="#{user.loggedIn()}">            
             <div id="topbar_menu">                             
                 <ul id="navigation" class="hover">
+
                     <a href="#">
-                        <li class="menuItem">
-                            <a href="#">
-                                <h2 class="menuItem_text2">Oversigter ⇓</h2>
-                            </a>
-                            <!-- Contains the navigation Dropdown list-->
-                            <ul class="dropdoen_list">
-                                <a href="#">
-                                    <li class="menuItem_dropDown">
-                                        Samariter
-                                    </li>
+
+                        <table>
+                            <td>
+                                <div class="dropdown">
+                                    <button onclick="getDropdownContent()" class="dropbtn">Dropdown</button>
+                                    <div id="myDropdown" class="dropdown-content">
+                                        <a onclick="getSamaritPage()" href="#">Samariter</a>
+                                        <a onclick="getEventPage()" href="events.xhtml">Events</a>
+
+                                    </div>
+
+                                </div>
+                            </td>
+                            <td>
+                                <a href="schedule.xhtml" class="test">
+                                    <h2 class="menuItem_text">Kalender</h2>
                                 </a>
-                                <a href="#">
-                                    <li class="menuItem_dropDown">
-                                       Events
-                                    </li>
-                                </a>    
-                            </ul>           
-                        </li>
+
+                            </td>
+
+                            <td>
+                                <h:link rendered="#{user.admin}" outcome="admin">
+                                    <h2 class="menuItem_text">Administrator</h2>
+                                </h:link>
+
+                            </td>
+                        </table>
                     </a> 
 
-                    <li class="menuItem">
-                        <a href="schedule.xhtml" class="test">
-                            <h2 class="menuItem_text">Kalender</h2>
-                        </a>
-                    </li>
-
-                    <li class="menuItem" style="border-right: solid 1px #F9F9F9;">
-                        <h:link rendered="#{user.admin}" outcome="admin">
-                            <h2 class="menuItem_text">Administrator</h2>
-                        </h:link>
-                    </li>
+                    
                 </ul>
             </div>
 
             <div class="topbar_userstatus">
                 <ul id="user_options" class="hover">
                     <li  class="menuItem2">
-                            <a href="userPage.xhtml">
-                                <h2 class="menuItem_text2">
-                                        Velkommen <login1>#{user.firstName}</login1> ⇓
-                                </h2>
-                            </a>
+                        <a href="userPage.xhtml">
+                            <h2 class="menuItem_text2">
+                                Velkommen <login1>#{user.firstName}</login1> ⇓
+                            </h2>
+                        </a>
 
-                             <!-- Contains the navigation Dropdown list-->
-                            <ul class="dropdoen_list">
-                                <li class="menuItem_dropDown2">
-                                    <table style="width:100%; border: solid 1px green; ">
-                                        <tr>
-                                            <td style="width:50%; border: solid 1px red; ">
-                                                <a href="userPage.xhtml">Profil</a>
-                                            </td>
-                                            <td style="width:50%; border: solid 1px red;">
-                                                <h:button styleClass="logout_Button" value = "Logud" outcome="login" />
-                                            </td>
-                                        </tr>
-                                    </table>   
-                                </li>
+                        <!-- Contains the navigation Dropdown list-->
+                        <ul class="dropdoen_list">
+                            <li class="menuItem_dropDown2">
+                                <table style="width:100%; border: solid 1px green; ">
+                                    <tr>
+                                        <td style="width:50%; border: solid 1px red; ">
+                                            <a href="userPage.xhtml">Profil</a>
+                                        </td>
+                                        <td style="width:50%; border: solid 1px red;">
+                                            <h:button styleClass="logout_Button" value = "Logud" outcome="login" />
+                                        </td>
+                                    </tr>
+                                </table>   
+                            </li>
 
-                            </ul> 
+                        </ul> 
                     </li>
                 </ul>
             </div>
+            <script src="scripts/dropdown.js"></script>
         </h:body> 
     </div>
 </html>
