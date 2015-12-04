@@ -17,39 +17,39 @@
 
     <h:body styleClass="body">
         <div id="header">
-              <ui:include src="/header.xhtml" />
+              <ui:include src="/templates/header.xhtml" />
         </div>
         <div id="content">
-            <h:form styleClass="wrap">
-          
-            <div class="loginImage"></div>
-
-            <table class="loginForm">
-                <tr>
-                    <td>
-                        <h:inputText p:placeholder="eMail" value="#{user.mail}" class="input" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <h:inputSecret p:placeholder="password" value="#{user.password}" class="input" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <!-- Checks which user id corresponds with the Email, and crosschecks that with the inputted password -->
-                        <h:commandButton value="Log in" styleClass="button" action="#{service.loginAuthenticator(user.mail, user.password)}">
-                            <!-- Saves the credentials -->
-                            <f:actionListener binding="#{user.login()}"/>
-                        </h:commandButton>
-                    </td>
-                </tr>
-            </table>
-        </h:form>
+            <div class="login_wrap">
+                <h:form>
+                    <div class="loginImage"></div>
+                        <table class="loginForm">
+                            <tr>
+                                <td>
+                                    <h:inputText p:placeholder="Indtast Email" value="#{user.mail}" styleClass="Login_input" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:inputSecret p:placeholder="Indtast Password" value="#{user.password}" styleClass="Login_input" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- Checks which user id corresponds with the Email, and crosschecks that with the inputted password -->
+                                    <h:commandButton value="Log in" styleClass="login_Button" action="#{service.loginAuthenticator(user.mail, user.password)}">
+                                        <!-- Saves the credentials -->
+                                        <f:actionListener binding="#{user.login()}"/>
+                                    </h:commandButton>
+                                </td>
+                            </tr>
+                    </table>
+                </h:form>
+            </div>
         </div>
 
-         <div id="footer">
-             <ui:include src="/footer.xhtml"/>
+         <div class="footer">
+              <ui:include src="/templates/footer.xhtml" />
         </div>
     </h:body>
 </html>

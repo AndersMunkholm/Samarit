@@ -10,7 +10,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>/page/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -18,6 +18,14 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/login.xhtml</welcome-file>
+        <welcome-file>page/login.xhtml</welcome-file>
     </welcome-file-list>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/page/templates/error.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/page/templates/error.xhtml</location>
+    </error-page>  
 </web-app>

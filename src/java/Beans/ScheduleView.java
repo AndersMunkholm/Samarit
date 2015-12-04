@@ -29,6 +29,7 @@ public class ScheduleView implements Serializable {
     @Inject
     private ServiceDatabase dbService;
     private boolean isRegistered;
+    private String registerString;
     private ScheduleEvent event = new DefaultScheduleEvent();
 
     public ScheduleView() {
@@ -40,7 +41,23 @@ public class ScheduleView implements Serializable {
         eventModel = new DefaultScheduleModel();
         initiateEvent();
         event = new DefaultScheduleEvent();
+    }
 
+    public String getRegisterString() {
+        return registerString;
+    }
+
+    public void setRegisterString(String registerString) {
+        this.registerString = registerString;
+    }
+
+    public boolean isIsRegistered() {
+        System.out.print(isRegistered);
+        return isRegistered;
+    }
+
+    public void setIsRegistered(boolean isRegistered) {
+        this.isRegistered = isRegistered;
     }
 
     public Date getInitialDate() {
@@ -83,6 +100,8 @@ public class ScheduleView implements Serializable {
 
     public void onEventSelect(SelectEvent selectEvent) {
         event = (ScheduleEvent) selectEvent.getObject();
+        getRegistrationText();
+        getRegistrationName();  
     }
 
     public void onDateSelect(SelectEvent selectEvent) {
@@ -105,8 +124,8 @@ public class ScheduleView implements Serializable {
         dbService.databaseConnection("CreateEventRegistration", event, person);
         event = new DefaultScheduleEvent();
     }
-    
-    public void deleteEventRegistration(Person person){
+
+    public void deleteEventRegistration(Person person) {
         dbService.databaseConnection("DeleteEventRegistration", event, person);
     }
 
@@ -123,23 +142,40 @@ public class ScheduleView implements Serializable {
             e.setId(id);
         }
     }
-    
-    public boolean isRegistered(Person person){
-        if(!dbService.isRegistred("IsRegistered", event, person)){
-            createEventRegistration(person);
+
+    public boolean isRegistered(Person person) {
+        if (!dbService.isRegistred("IsRegistered", event, person)) {
             isRegistered = true;
+            createEventRegistration(person);
+           
             return true;
-        }
-        else {
+        } else {
+             isRegistered = false;
             deleteEventRegistration(person);
-            isRegistered = false;
-        return false;    
+            return false;
         }
-     }   
+    }
     
-     public boolean returnIsRegistered(){
-         return isRegistered;
-    
+    public String getRegistrationName(){
+        if(!isRegistered)
+            return "Registered to event";
+                    else
+            return "Deleted from event";
+    }
+
+    public String getRegistrationText() {
+        
+        if (!isRegistered) {
+            return "You have registered for this event";
+        } else {
+            return "You have deleted your registration for this event";
+        }
+    }
+
+    public boolean returnIsRegistered() {
+
+        return isRegistered;
+
     }
 
 }

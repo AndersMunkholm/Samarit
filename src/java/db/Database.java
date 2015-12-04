@@ -44,7 +44,7 @@ public class Database {
     private EventFrame eventFrame;
     private ArrayList<EventFrame> eventFrameList;
     private Event eventModel;
-    
+
     public Database(String type, ScheduleEvent event, Person person) {
         this.type = type;
         this.event = event;
@@ -52,21 +52,10 @@ public class Database {
 
     }
     
-    public Database(String type, Event event) {
-        this.eventModel = event;
-        this.type = type;
-    
-    }
-    
-    
     public Database(String type, EventFrame eventFrame) {
         this.type = type;
         this.eventFrame = eventFrame;
         this.eventFrameList = new ArrayList<>();
-    }
-
-    public Boolean getIsRegistred() {
-        return isRegistred;
     }
 
     public Database(String type, ScheduleEvent event) {
@@ -91,7 +80,7 @@ public class Database {
 
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             minConnection = DriverManager
-                    .getConnection("jdbc:sqlserver://KAIBYS\\SQLEXPRESS;databaseName=Samarit;user=sa;password=Andersti29;");
+                    .getConnection("jdbc:sqlserver://MORTEN-PC;databaseName=Samarit;user=sa;password=helloworld;");
             stmt = minConnection.createStatement();
             if (type.equals("CreateEvent")) {
                 opretEvent();
@@ -195,7 +184,7 @@ public class Database {
 
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             minConnection = DriverManager
-                    .getConnection("jdbc:sqlserver://KAIBYS\\SQLEXPRESS;databaseName=Samarit;user=sa;password=Andersti29;");
+                    .getConnection("jdbc:sqlserver://MORTEN-PC;databaseName=Samarit;user=sa;password=helloworld;");
             stmt = minConnection.createStatement();
             res = stmt.executeQuery("select * from SamaritEvent;");
             while (res.next()) {
@@ -304,7 +293,8 @@ public class Database {
     }
 
     
-    public void createEventFrame(EventFrame eventFrame) throws SQLException {
+    
+     public void createEventFrame(EventFrame eventFrame) throws SQLException {
         res = stmt.executeQuery("Execute createEventFrame '" + eventFrame.getStartDate().toString() + "', '" + eventFrame.getStartTime().toString() + "', '" + eventFrame.getEndTime().toString() + "', '" + eventFrame.getEventId() + "';");
         
     
@@ -337,6 +327,7 @@ public class Database {
 
     
     
-   
-    
+    public Boolean getIsRegistred() {
+        return isRegistred;
+    }
 }

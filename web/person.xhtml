@@ -7,100 +7,117 @@ The admin site used for creating and managing users
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <link href="style.css" rel="stylesheet" type="text/css"/>
+       <link href="style.css" rel="stylesheet" type="text/css"/>
         <title>Person CRUD</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="scheduleQuery.js" type="text/javascript"></script>
     </h:head>
+    
     <h:body styleClass="body" rendered="#{user.admin}">
         <div id="header">
-            <ui:include src="/header.xhtml" />
-        </div>
+              <ui:include src="/templates/header.xhtml" />
+        </div>    
+    
+        
         <div id="content">
-            <h:form styleClass="form">
-                <h2>Opret ny bruger</h2>
-                <table class="border">
-                    <tr>
-                        <td>
-                            <h3>*Fornavn:</h3>
-                        </td>
-                        <td>
-                            <h:inputText p:placeholder="Enter Name" value="#{newUser.firstName}" styleClass="input" />
-                        </td>
-                        <td>
-                            <h3>Mellemnavn:</h3>
-                        </td>
-                        <td>
-                            <h:inputText p:placeholder="Enter Name" value="#{newUser.middleName}" styleClass="input" />
-                        </td>   
-                    </tr>
-                    <tr>
-                        <td>
-                            <h3>*Efternavn:</h3>
-                        </td>
-                        <td>
-                            <h:inputText p:placeholder="Enter Name" value="#{newUser.lastName}" styleClass="input" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h3>*eMail:</h3>
-                        </td>
-                        <td>
-                            <h:inputText p:placeholder="Enter Name" value="#{newUser.mail}" styleClass="input" />
-                        </td>
-                        <td>
-                            <h3>*Password:</h3>
-                        </td>
-                        <td>
-                            <h:inputText p:placeholder="Enter Name" value="#{newUser.password}" styleClass="input" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h3>
-                                AdminStatus
-                            </h3>
-                        </td>
-                        <td>
-                            <h:selectBooleanCheckbox value="#{newUser.admin}"/>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <h:commandButton value="#{service.userList.size()}" action="#{service.createUser(newUser.firstName, newUser.middleName, newUser.lastName, newUser.mail, newUser.password, newUser.admin)}"/>
-                        </td>
-                    </tr>
-                </table>
-            </h:form>
-            <!-- A list of users and various info -->
-            <table>
-                <h3>Brugerliste</h3>
-                <!--updates the stats -->
-                #{service.personStat()}
-                <h:dataTable value="#{service.userList}" var="uuser" border="1" >
+                <!-- A list of users and various info -->
+            <div class="data_table_wrap">
+                <div class="data_table_header">
+                     <h3 class="data_table_header_logo">Brugerliste</h3>
+                     <p>#{service.userList.size()}</p>
+                </div>
+                 <!--updates the stats -->
+                 #{service.personStat()}
+                <h:dataTable class="data_table" value="#{service.userList}" var="uuser" border="1" >
                     <h:column>
                         <f:facet name="header">Bruger ID</f:facet>
-                            #{uuser.ID}
+                        #{uuser.ID}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Bruger Navn</f:facet>
-                            #{uuser.firstName} #{uuser.middleName} #{uuser.lastName}
+                        #{uuser.firstName} #{uuser.middleName} #{uuser.lastName}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Email</f:facet>
-                            #{uuser.mail}
+                        #{uuser.mail}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Poster Taget</f:facet>
-                            #{uuser.postStat}
+                        #{uuser.postStat}
                     </h:column>
                 </h:dataTable>
-            </table>
+            </div>
+                
+            <div class="popup_form_wrap">
+                <div class="data_table_header">
+                     <h3 class="data_table_header_logo">Opret Bruger</h3>
+                </div>
+                <h:form styleClass="popup_form">
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>*Fornavn:</h3>
+                            </td>
+                            <td>
+                                <h:inputText p:placeholder="Enter Name" value="#{newUser.firstName}" styleClass="input" />
+                            </td>
+                        </tr>
+                        <tr>  
+                            <td>
+                                <h3>Mellemnavn:</h3>
+                            </td>
+                            <td>
+                                <h:inputText p:placeholder="Enter Name" value="#{newUser.middleName}" styleClass="input" />
+                            </td>   
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>*Efternavn:</h3>
+                            </td>
+                            <td>
+                                <h:inputText p:placeholder="Enter Name" value="#{newUser.lastName}" styleClass="input" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>*eMail:</h3>
+                            </td>
+                            <td>
+                                <h:inputText p:placeholder="Enter Name" value="#{newUser.mail}" styleClass="input" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>*Password:</h3>
+                            </td>
+                            <td>
+                                <h:inputText p:placeholder="Enter Name" value="#{newUser.password}" styleClass="input" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>
+                                    AdminStatus
+                                </h3>
+                            </td>
+                            <td>
+                                <h:selectBooleanCheckbox value="#{newUser.admin}"/>
+                            </td>
+                        </tr>                    
+                        <tr>
+                            <td>
+                                <h:commandButton value="Opret bruger" action="#{service.createUser(newUser.firstName, newUser.middleName, newUser.lastName, newUser.mail, newUser.password, newUser.admin)}"/>
+                            </td>
+                        </tr>
+                    </table>
+                </h:form>
+            </div>
         </div>
+        
     </h:body>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+     <script src="scripts/dropit.js" type="text/javascript"></script>
+     <script src="scripts/script.js" type="text/javascript"></script>
 </html>

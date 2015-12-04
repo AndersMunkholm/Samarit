@@ -10,17 +10,33 @@ and open the template in the editor.
 
 /*--------- Template Page ---------*/
 h1{
+    padding: 0px;
     margin: 0px;
 }
-.input {
+ul {
+    padding: 0;
+    list-style: none;
+}
+ul.hover li:hover {
+        background-color: #1ABC9C;
+    }
+li {
+    margin: 0px;
+    padding: 0;
+}
+.dropdoen_list {
+    margin: 0;
+}
+.Login_input {
     width: 100%;
-    height: 135%;
+    height: 90%;
     padding-top: 5%;
     padding-bottom: 2%;
-    border-radius: 8px;
+
     font-size: 38px;
 }
 .body {
+    width: 100%;
     background-color: #F9F9F9;
     margin: 0px;
 }
@@ -32,80 +48,154 @@ h1{
     position: fixed;
     z-index: 100;
 }
-
-.topMenu{
-    float: right;
-    width: 75%;
-}
-
-.menuItem{
-    background-color: purple;
-    height: 50px;
-    width: 150px;
-    border-left: #ffff00 solid 1px;
-    margin: 0px;
-    float: right;
-    top: 0px;
-}
-
-.title_logo {
+#topbar_home {
+    width: 21.5%;
+    height: 60px;
     padding-left: 15px;
     padding-top: 10px;
-    width: 25%;
-    color: white;
+    float: left;
+
+    color: white;    
 }
+#loggedIn_menu {
+    width: 77%;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    float: left;   
+}
+    #logo{
+        height: 60px;
+        width: 60px;
+        background-image: url("images/logo.png"); 
+    }
+#topbar_menu {
+    width: 79%;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    float: left;
+
+}
+    #navigation{
+        width: 100%;
+        margin: 0;
+    }
+    #navigation li{
+        height: 60px;
+        display: inline-block;  
+    }
+    #navigation li a {
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        color: white;
+    }
+    .test {
+        height: 100%;
+    }
+        .menuItem {
+            width:18%;
+            color: white;
+            border-left: solid #F9F9F9 1px;
+            float: left;
+        }
+        .menuItem_text {
+            height: 45px;
+            padding-left: 10px;
+            padding-top: 15px;
+            margin: 0;
+        }
+        .menuItem_text2 {
+            height: 50px;
+            padding-left: 10px;
+            padding-top: 10px;
+            margin: 0
+        }
+        .menuItem_dropDown {
+            width: 100%;
+            height: 60px;
+
+            background-color: #3E4651;
+            color: white;
+            border-top: solid #F9F9F9 1px;
+        }
+        
+    .topbar_userstatus {
+        width: 20%;
+        height: auto;
+        float: right;
+    }
+        #user_options {
+            width: 100%;
+            margin: 0;
+        }
+        .menuItem_dropDown2 {
+            width: 100%; 
+            height: 150px; 
+            background-color: #3E4651;
+            border:solid 1px #F9F9F9;
+        }
+        #user_options li a {
+            text-decoration: none;
+            color: white;
+        }  
+             .menuItem2 {
+                height: 60px;
+                width:100%;
+                color: white;
+                border-left: solid #F9F9F9 1px;
+            }
+        .user_name {
+            margin: 0;
+        }
+
 #content {
+    width: 100%;
+    min-height:100%;
     padding-top: 60px;
+    float:left;
+    
 }
 .footer {
-    position: absolute;
-    bottom: 0;
-    height: 60px;
-    background: #f0f0f0;
     width: 100%;
-
+    height: 60px;
+    position:fixed;
+    bottom:0;
+    z-index: 100;
+    background-color: #f0f0f0;
     border-top: solid 1px #3E4651;
-    border-bottom: solid 1px #3E4651;
 }
 .footer_logo {
     padding-left: 15px;
-    padding-top: 10px;
-    color: #3E4651;
+    width: 25%;
 }
 
 /*--------- Login Page ---------*/
 
-#login {
-    background-color: orange;
-    height: 50px;
-    width: 150px;
-    margin: 0px;
-    float: right;
-        
-}
-
-
-
-.loginImage {
-    width: 790px;
-    height: 325px;
+.login_wrap {
+    width: 491px;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
-    background-image: url("images/samarit_img.jpg");
+    margin-top: 1%;
+    background-color: white;
+    
+    box-shadow: 10px 10px 5px #888888;
+}
+.loginImage {
+    width: 491px;
+    height: 408px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("images/login_img.jpg");
     background-repeat: none;
 }
 .loginForm {
-    width: 50%;
-    height: 9%;
-    
-    background-color: white;
-    border: solid 1px #3E4651;
-    border-radius: 10px;
-    
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    height: auto;   
 }
-.loginButton {
+.login_Button {
     border: 0 none;
     border-radius: 36px;
   
@@ -126,22 +216,72 @@ h1{
 .loginButton:hover {
     opacity: .7;
 }
-
-/*--------- User Page ---------*/
-#userPage{
-    background: yellow;
-    height: 30px;
-    width: 100%;
+.logout_Button {
+    
 }
 
+/*--------- User Page ---------*/
+.data_table_wrap {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    box-shadow: 10px 10px 5px #888888;
+    border-radius: 10px;
+}
+.data_table {
+    width: 100%;
+    border: none;
+}
+.data_table_header {
+    width: 100%;
+    height: auto;
+    margin-bottom: 2%;
+    border-bottom: 1px solid #3E4651;
+}
+.data_table_header_logo {
+    padding-left: 15px;
+    padding-top: 15px;
+    width: 20%;
+    color: black;
+}
+.popup_form_wrap {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    box-shadow: 10px 10px 5px #888888;
+    border-radius: 10px;
+}
+.popup_form {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
 /*--------- Index Page ---------*/
 .calender {
     float: left;
     width: 100%;
     padding-top: 60px;
 }
-
 .panel {
     width: 100%;
-    border: solid 1px green;
+}
+.errorWrap {
+    border: solid 1px red;
+    width: 50%;
+    height: 408px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.errorImage {
+    width: 354px;
+    height: 408px;
+    background-image: url("images/errorpage.PNG");
+    float: left;
+}
+.errorText {
+    width:400px;
+    height: auto;
+    float: left;
 }

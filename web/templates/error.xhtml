@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Error page used when the login information is incorrect
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Error</title>
+        <link href="../style.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    
+    <div class="errorWrap">
+        <div class="errorImage">
+        </div>
+        
+        <div class="errorText">
+            <h1>Der er desværre sket en fejl.</h1>
+            <h2>Gå tilbage og prøv igen</h2>
+            
+            <h:body>
+                <h:form>
+                        <h:commandButton value="Tilbage" action="login"/>
+                </h:form>
+            </h:body>
+            <h3>
+                Ved gentagne problemer kan webmaster kontaktes <a href="#">Her</a>
+            </h3>
+        </div>
+    </div>
+    
+    
+</html>
