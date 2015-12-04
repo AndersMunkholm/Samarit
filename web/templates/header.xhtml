@@ -11,7 +11,7 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-
+        
 
     <div id="topbar_home">
         <div>
@@ -30,9 +30,9 @@ and open the template in the editor.
                                 <div class="dropdown">
                                     <button onclick="getDropdownContent()" class="dropbtn">Dropdown</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a onclick="getSamaritPage()" href="#">Samariter</a>
+                                        <a onclick="getSamaritPage()" href="samaritPage.xhtml">Samariter</a>
                                         <a onclick="getEventPage()" href="events.xhtml">Events</a>
-
+                                            <!--LAV ORDENTLIG NAVIGATION DETTE ER IKKE PÆNT-->
                                     </div>
 
                                 </div>
@@ -86,6 +86,7 @@ and open the template in the editor.
                 </ul>
             </div>
             <script src="scripts/dropdown.js"></script>
+            
         </h:body> 
     </div>
 </html>

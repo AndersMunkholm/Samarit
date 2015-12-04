@@ -26,11 +26,11 @@ window.onclick = function(event) {
   }
 }
 
-function getSamaritPage() {
+$(function getSamaritPage() {
+    //$("#samaritTable").
     
     
-    
-}
+});
 
 function getEventPage() {
     
