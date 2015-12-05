@@ -5,37 +5,27 @@
  */
 
 
-$(function getSamaritPage(parameter) {
+window.onload = function setUpSamaritTable() {
+    var pParameterJSON = document.getElementById("samaritObjects").innerHTML; //tager alt indholdet af p og laver det til en Streng
     
-    var samarits = {"firstName":"John", "lastName":"Doe"};
-    $("#samaritTable").append("<tr><td> " + "asdasdljkhaskjdhasjidkhaskjdhaskjhdkjashdkjashdkjashdkjhaskjdhaskjdhaskjhdkjashdkhasjdhaskjdhaskjdhkasjhdkjashdkjashdkhaskjdhakjshdkjahsdkjhashd" + "</td><tr>");
+    var samaritJSON = JSON.parse(pParameterJSON); //laver Strengen til json
+    console.log(samaritJSON); //for at se hvilke objecter der er i pushed op, tryk F12 for at se det 
     
+    var tableMeat = "";
+    for (var i = 0; i < samaritJSON.length; i++) {  //går igennem alle objecter, Et object består af FirstName, LastName og mail
+        tableMeat += "<tr>" + 
+                "<td>" + samaritJSON[i].FirstName + "</td>"+ 
+                "<td>" + samaritJSON[i].LastName + "</td>" + 
+                "<td>" + samaritJSON[i].mail + "</td>"
+                + "</tr>";     //ligger hvor object ind i en tabel
+       
+        
+    }
     
-                    
-            
-            
+    document.getElementById("samaritTable").innerHTML = tableMeat;
     
+    document.removeChild(document.getElementById("samaritObjects"));
     
-    
-    
-    
-    
-    
-    
-    
-    
-//    $.getJSON(samarits , function(jason) {
-//            $.each(jason, function(i, field) {
-//                $("#samaritTable").append("<tr>" + "<td>" + i + "</td>" + "</tr>");
-//                
-//                
-//            });
-//        
-//      
-//        
-//    });
-    
-    
-});
-
-
+    console.log(tableMeat);
+    console.log(i);
+}
