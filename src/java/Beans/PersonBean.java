@@ -95,7 +95,24 @@ public class PersonBean implements Serializable {
         
     }
     
+    public String getAllSamarits() {
+        ArrayList<Person> personList = service.getUserList();
+        String JSON = "[ ";        
+        for (Person o : personList) {
+                   JSON = JSON + " { " + " \"FirstName\": \"" + o.getFirstName() + "\", \"LastName\": \"" + o.getLastName() + "\", \"mail\": \"" + o.getMail() + "\" },";
+                }
+        
+        JSON = JSON.substring(0, JSON.length()-1) + " ]";
+        
+        System.out.println(JSON);
+        return JSON;
+    }
     
+//    {
+//  "one": "Singular sensation",
+//  "two": "Beady little eyes",
+//  "three": "Little birds pitch by my doorstep"
+//}
     public void setID(int ID) {
         this.ID = ID;
     }
