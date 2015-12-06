@@ -133,4 +133,16 @@ public class Service implements Serializable {
         return false;
     }
 
+    public ArrayList<Event> getEventInformation(Person person) {
+        ArrayList<Event> event = new ArrayList<>();
+        
+        Database database = new Database("getEventObjectsbyPerson", person);
+        database.databaseConnection();
+        event = database.getEventListObjects();
+        for (Event e : event) {
+            Database databases = new Database("",person);
+        }
+        return event;
+    }
+
 }

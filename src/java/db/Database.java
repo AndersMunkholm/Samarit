@@ -44,7 +44,9 @@ public class Database {
     private EventFrame eventFrame;
     private ArrayList<EventFrame> eventFrameList;
     private Event eventModel;
-
+    private ArrayList<Event> events;
+    
+    
     public Database(String type, ScheduleEvent event, Person person) {
         this.type = type;
         this.event = event;
@@ -67,8 +69,14 @@ public class Database {
     public Database(String type, Person person) {
         this.type = type;
         this.person = person;
-        this.eventList = new ArrayList<>();
+        if (this.type.equals("getEventObjectsbyPerson")) {
+            this.events = new ArrayList<>();
+        } else {
+            this.eventList = new ArrayList<>();
+        }
     }
+    
+   
 
     public Database(String type) {
         this.type = type;
@@ -142,6 +150,10 @@ public class Database {
            
                 getEventFramesEventId(this.eventModel);
               
+            }
+            if (type.equals("getEventObjectsbyPerson")) {
+                getEventObjectsbyPerson(person);
+            
             }
 
         } catch (Exception e) {
@@ -313,7 +325,7 @@ public class Database {
         res = stmt.executeQuery("Execute getEventFrameEvent '" + eventFrame.getEventId() + "';");
         while (res.next()) {
             this.eventFrameList.add(new EventFrame(
-                    LocalDate.parse(res.getString("startDate"))
+                     LocalDate.parse(res.getString("startDate"))
                     ,LocalTime.parse(res.getString("startTime"))
                     ,LocalTime.parse(res.getString("endTime"))
                     ,event,
@@ -321,6 +333,23 @@ public class Database {
             
         }
     
+    }
+    
+    
+    public void getEventObjectsbyPerson(Person person) throws SQLException, ParseException {
+        res = stmt.executeQuery("Execute eventsByPerson '" + person.getID() + "';");
+         DateFormat format = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy", Locale.ENGLISH);
+         
+        while (res.next()) {
+            
+            this.events.add(new Event(
+                    res.getString("eventId")
+                    ,res.getString("name")
+                    ,format.parse(res.getString("beginTime"))
+                    ,format.parse(res.getString("endTime"))));
+                
+               
+        }
     }
     
     
@@ -333,5 +362,9 @@ public class Database {
     
     public Boolean getIsRegistred() {
         return isRegistred;
+    }
+
+    public ArrayList<Event> getEventListObjects() {
+        return this.events;
     }
 }

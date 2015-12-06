@@ -12,8 +12,8 @@ function getDropdownContent() {
 
 
 
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
+window.onclick = function(event) { //sker hver gang der bliver clicket på et event, Det event kommer ind i functionen
+  if (!event.target.matches('.dropbtn')) { //tjekker om det event der skete er sket på dropbtn id'et
 
     var dropdowns = document.getElementsByClassName("dropdown");
     var i;

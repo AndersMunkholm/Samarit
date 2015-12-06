@@ -29,6 +29,16 @@ public class Person{
     
     }
     
+    /**
+     * 
+     * @param firstName String
+     * @param middleName String
+     * @param lastName  String
+     * @param mail String
+     * @param password String
+     * @param isAdmin boolean
+     */
+    
     public Person(String firstName, String middleName, String lastName, 
             String mail, String password,boolean isAdmin) {
       
@@ -40,6 +50,16 @@ public class Person{
         this.isAdmin = isAdmin;
         this.eventFrame = new ArrayList<>();
     }
+    /**
+     * 
+     * @param id int
+     * @param firstName String
+     * @param middleName String
+     * @param lastName String
+     * @param mail String
+     * @param password String
+     * @param isAdmin boolean
+     */
     
     public Person(int id, String firstName, String middleName, String lastName, 
             String mail, String password,boolean isAdmin) {

@@ -108,6 +108,17 @@ public class PersonBean implements Serializable {
         return JSON;
     }
     
+    public String getAllEventInformation() {
+        Person person = new Person(this.ID,this.firstName,this.middleName,this.lastName,this.mail,this.password,this.isAdmin()); //skal dette sidde på beanen??Ja hvis person skal kende sine events, ellers forsvinder det jo
+        ArrayList<Event> personList = service.getEventInformation(person);
+        
+        
+        
+        String JSON = "";
+        
+        return JSON;
+    }
+    
 //    {
 //  "one": "Singular sensation",
 //  "two": "Beady little eyes",

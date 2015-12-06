@@ -12,7 +12,11 @@ window.onload = function setUpSamaritTable() {
     var samaritJSON = JSON.parse(pParameterJSON); //laver Strengen til json
     console.log(samaritJSON); //for at se hvilke objecter der er i pushed op, tryk F12 for at se det 
     
-    var tableMeat = "";
+    var tableMeat = "<tr>" + 
+            "<td>FirstName</td>" + 
+            "<td>LastName</td>" + 
+            "<td>Mail</td>" + 
+            "</tr>";
     for (var i = 0; i < samaritJSON.length; i++) {  //går igennem alle objecter, Et object består af FirstName, LastName og mail
         tableMeat += "<tr>" + 
                 "<td>" + samaritJSON[i].FirstName + "</td>"+ 

@@ -10,16 +10,26 @@ and open the template in the editor.
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-    <head>
+    <h:head>
         <title>Samarit Statistics</title>
         <link rel="stylesheet" type="text/css" href="style.css" />
-    </head>
-    <body>
-         <div id="header">
+    </h:head>
+    <h:body>
+        <div id="header">
             <ui:include src="/templates/header.xhtml" />
         </div>
-       
-        
-        
-    </body>
+        <h:form>
+            <div id="tableDiv">
+                <table id="eventFrameTable">
+
+
+                </table>
+            </div>
+
+
+        </h:form>
+
+        <h:outputScript name="eventPage.js" target="body" ></h:outputScript>
+
+    </h:body>
 </html>
