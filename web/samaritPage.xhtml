@@ -9,33 +9,40 @@ and open the template in the editor.
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      
-      
       >
-      
-        
+
+
 
     <h:head>
         <title>TODO supply a title</title>
-
-    </h:head>
-    <h:body >
-        <h:form>
-        <div>
-
-            <p id="samaritObjects">#{user.allSamarits}</p>
-            <table id="samaritTable">
-
-            </table>
-            
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </h:head >
+    <h:body>
+        <div id="header">
+            <ui:include src="/templates/header.xhtml" />
         </div>
-        
-        
+        <h:form>
+            <br/>
+            <br/>
+            <br/> <p>ændre xhtml for at det ser rigtigt ud, måske css</p>
+            <p>
+                Samarit Information
+            </p>
+            <div id="tableDiv">
 
-            
+                <p id="samaritObjects">#{user.allSamarits}</p>
+                <table id="samaritTable">
+
+                </table>
+
+            </div>
+
+
+
+
             <h:outputScript name="samaritPage.js" target="body" ></h:outputScript>
-            <h:outputStylesheet name="samaritPageStyle.css"/>
             
+
         </h:form>
     </h:body>
 </html>

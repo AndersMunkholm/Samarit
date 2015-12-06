@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-
+//window er der hvor alle objecter ligger
 window.onload = function setUpSamaritTable() {
+    //document er html documentet som javascriptet er indsat ind i
     var pParameterJSON = document.getElementById("samaritObjects").innerHTML; //tager alt indholdet af p og laver det til en Streng
     
     var samaritJSON = JSON.parse(pParameterJSON); //laver Strengen til json
@@ -22,10 +23,14 @@ window.onload = function setUpSamaritTable() {
         
     }
     
-    document.getElementById("samaritTable").innerHTML = tableMeat;
     
-    document.removeChild(document.getElementById("samaritObjects"));
+    document.getElementById("samaritTable").innerHTML = tableMeat; //targer tableMeat og indsætter det ind i table
     
+    var parent = document.getElementById("tableDiv"); //finder div med et div1 id. Dette er et træ, hvor samaritObjects er inde i
+    parent.removeChild(document.getElementById("samaritObjects")); //sletter barnet fra div1, som er samaritObjects
+   
     console.log(tableMeat);
-    console.log(i);
+    console.log(i); // logger hvor mange gange for loopet er kørt
+    window.alert("Success!! Tryk F12 for at være sikker");
+
 }
