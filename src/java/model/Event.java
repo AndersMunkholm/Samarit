@@ -37,15 +37,15 @@ public class Event {
         this.eventFrames = new ArrayList<>();
     }
 
-    /**
-     * public boolean isEvent(int ID){ for(int i = 0;
-     * i<service.getEventList().size(); i++){
-     * if(service.getEventList().get(i).getID() == ID ){ return true; } }
-     *
-     * return false; };
-     *
-     *
-     */
+    //**   Dette er ikke en comment men javadoc, Du skylder nu øl
+     //* public boolean isEvent(int ID){ for(int i = 0;
+     //* i<service.getEventList().size(); i++){
+     //* if(service.getEventList().get(i).getID() == ID ){ return true; } }
+//     *
+//     * return false; };
+//     *
+//     *
+//     */
     
     
     public void createEventFrame(LocalDate startDate, LocalTime startTime, LocalTime endTime) {
@@ -64,6 +64,11 @@ public class Event {
     
     public ArrayList<EventFrame> getEventFrames() {
         return this.eventFrames;
+    }
+    
+    public void addEventFrame(EventFrame eventFrame) {
+        this.eventFrames.add(eventFrame);
+    
     }
     
     
@@ -100,4 +105,20 @@ public class Event {
         this.endDate = endDate;
     }
 
+    @Override
+    public String toString() {
+        String JSON = "";
+        String JSONFRAMES = "[ ";
+        for (EventFrame f : this.eventFrames) {
+            JSONFRAMES = JSONFRAMES + f.toString() + ",";
+        }
+        
+        JSONFRAMES = JSONFRAMES.substring(0, JSONFRAMES.length()-1) + " ]";
+        
+        JSON =  " { " + " \"Name\": \"" + this.name+ "\", \"StartDate\": \"" + this.startDate + "\", \"endDate\": \"" + this.endDate + "\", \"EventFrames\": " + JSONFRAMES + " }";
+        
+        
+        return JSON;
+    }
+    
 }

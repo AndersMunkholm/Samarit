@@ -9,6 +9,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import model.Person;
 import model.Event;
+import model.EventFrame;
 import model.Registration;
 import org.primefaces.model.ScheduleEvent;
 
@@ -132,15 +133,30 @@ public class Service implements Serializable {
 
         return false;
     }
+    /**
+     * 
+     * @param person
+     * @return All Events and their respective eventFrames. Connected to the person parameter
+     */
 
     public ArrayList<Event> getEventInformation(Person person) {
         ArrayList<Event> event = new ArrayList<>();
-        
+        ArrayList<EventFrame> eventFrame = new ArrayList<>();
         Database database = new Database("getEventObjectsbyPerson", person);
         database.databaseConnection();
         event = database.getEventListObjects();
+        Database databases = new Database("getEventFrameByPerson",person);
+        databases.databaseConnection();
+        eventFrame = databases.getFrameList();
         for (Event e : event) {
-            Database databases = new Database("",person);
+           for (EventFrame f : eventFrame) {
+               if (f.getEventId().equals(e.getID())) {
+                  
+                  e.addEventFrame(f);
+                  f.setEvent(e);
+               }
+           }
+          
         }
         return event;
     }

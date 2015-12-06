@@ -36,7 +36,7 @@ public class EventFrame {
         this.event = event;
         this.startTime = startTime;
         this.endTime = endTime;
-
+       
     }
     
     public EventFrame(LocalDate startDate, LocalTime startTime, LocalTime endTime,Event event, int eventFrameId) {
@@ -47,6 +47,9 @@ public class EventFrame {
         this.eventFrameId = eventFrameId;
 
     }
+    
+    
+    
     
 
     public LocalDate getStartDate() {
@@ -101,6 +104,19 @@ public class EventFrame {
     
     }
     
-    
+    @Override
+    public String toString() {
+        String JSON = "";
+        
+        JSON =  " { " + " \"StartDate\": \"" + this.startDate + "\", \"StartTime\": \"" + this.startTime + "\", \"endTime\": \"" + this.endTime + "\" }";
+        
+        
+        
+        return JSON;
+    }
+
+    public void setEvent(Event e) {
+        this.event = e;
+    }
 
 }

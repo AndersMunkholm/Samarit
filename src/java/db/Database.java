@@ -69,11 +69,9 @@ public class Database {
     public Database(String type, Person person) {
         this.type = type;
         this.person = person;
-        if (this.type.equals("getEventObjectsbyPerson")) {
-            this.events = new ArrayList<>();
-        } else {
-            this.eventList = new ArrayList<>();
-        }
+        this.events = new ArrayList<>();
+        this.eventList = new ArrayList<>();
+        this.eventFrameList = new ArrayList<>();
     }
     
    
@@ -154,6 +152,9 @@ public class Database {
             if (type.equals("getEventObjectsbyPerson")) {
                 getEventObjectsbyPerson(person);
             
+            }
+            if (type.equals("getEventFrameByPerson")) {
+                getEventFrameByPerson(person);
             }
 
         } catch (Exception e) {
@@ -353,6 +354,8 @@ public class Database {
     }
     
     
+    
+    
     public ArrayList<EventFrame> getFrameList() {
     
         return this.eventFrameList;
@@ -366,5 +369,24 @@ public class Database {
 
     public ArrayList<Event> getEventListObjects() {
         return this.events;
+    }
+
+    private void getEventFrameByPerson(Person person) throws SQLException {
+        res = stmt.executeQuery("Execute getEventFramesPerson '" + person.getID() + "';");
+         
+        while(res.next()) {
+            this.eventFrameList.add(new EventFrame(
+                     LocalDate.parse(res.getString("startDate"))
+                    ,LocalTime.parse(res.getString("startTime"))
+                    ,LocalTime.parse(res.getString("endTime"))
+                    ,new Event(res.getString("eventId"),null,null,null),
+                    Integer.parseInt(res.getString("eventFrameId")))
+            
+            
+            
+            );
+        }
+        
+        
     }
 }
