@@ -108,7 +108,7 @@ public class EventFrame {
     public String toString() {
         String JSON = "";
         
-        JSON =  " { " + " \"StartDate\": \"" + this.startDate + "\", \"StartTime\": \"" + this.startTime + "\", \"endTime\": \"" + this.endTime + "\" }";
+        JSON =  " { " + " \"StartDate\": \"" + this.startDate + "\", \"StartTime\": \"" + this.startTime + "\", \"EndTime\": \"" + this.endTime + "\" }";
         
         
         

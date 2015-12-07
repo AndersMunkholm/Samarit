@@ -35,6 +35,5 @@ window.onload = function setUpSamaritTable() {
    
     console.log(tableMeat);
     console.log(i); // logger hvor mange gange for loopet er kørt
-    window.alert("Success!! Tryk F12 for at være sikker");
-
+    
 }

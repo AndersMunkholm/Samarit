@@ -17,10 +17,47 @@ window.onload = function() {
             "<td>EventFrames</td>" + 
             "</tr>";
     for (var i = 0; i < JSONFrames.length; i++) {
-        
+        tableMeat += "<tr>" + 
+            "<td>" + JSONFrames[i].Name + "</td>" + 
+            "<td>"+ JSONFrames[i].StartDate  + "</td>" +
+            "<td>" + JSONFrames[i].EndDate + "</td>" + 
+            "<td>";
+            for (var k = 0; k < JSONFrames[i].EventFrames.length; k++) {
+                tableMeat += "<table>" + 
+                    "<tr>" +
+                    "<td>" +
+                    "StartDate" + 
+                    "</td>" +
+                    "<td>" +
+                    "StartTime" + 
+                    "</td>" +
+                     "<td>" +
+                    "endTime" + 
+                    "</td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td>" +
+                    JSONFrames[i].EventFrames[k].StartDate + 
+                    "</td>" +
+                    "<td>" +
+                    JSONFrames[i].EventFrames[k].StartTime + 
+                    "</td>" +
+                     "<td>" +
+                    JSONFrames[i].EventFrames[k].EndTime + 
+                    "</td>" +
+                    "</tr>" +
+                    "</table>";
+                }
+            tableMeat += "</td>" + 
+            "</tr>";
         
     }
-        
+    
+    
+    document.getElementById("eventFrameTable").innerHTML = tableMeat;
+    var parent = document.getElementById("tableDiv"); //finder div med et div1 id. Dette er et træ, hvor samaritObjects er inde i
+    parent.removeChild(document.getElementById("eventObjects")); //sletter barnet fra div1, som er samaritObjects
+    console.log(i);
         
 }
     
