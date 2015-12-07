@@ -122,11 +122,18 @@ public class PersonBean implements Serializable {
         return JSON;
     }
     
-//    {
-//  "one": "Singular sensation",
-//  "two": "Beady little eyes",
-//  "three": "Little birds pitch by my doorstep"
-//}
+    
+    public String getInvalidLengthLogin() {
+    
+        return "The login is not valid";
+    }
+    
+    
+    public String getInvalidLengthPassword() {
+    
+        return "The password is not valid";
+    }
+    
     public void setID(int ID) {
         this.ID = ID;
     }

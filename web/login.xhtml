@@ -8,8 +8,8 @@
     
     <h:head>
         <title>Samarit Login</title>
-        <link href="style.css" rel="stylesheet" type="text/css"/>
-       
+        <!--<link href="style.css" rel="stylesheet" type="text/css"/>-->
+        <h:outputStylesheet name="style.css" />
         
         <!-- Clear's the credentials from PersonBean -->
         #{user.clearCredentials()}
@@ -26,12 +26,18 @@
                         <table class="loginForm">
                             <tr>
                                 <td>
-                                    <h:inputText p:placeholder="Indtast Email" value="#{user.mail}" styleClass="Login_input" />
+                                    <h:inputText id="inputText11"  p:placeholder="Indtast Email" value="#{user.mail}" styleClass="Login_input" validatorMessage="#{user.invalidLengthLogin}" required="true" >
+                                       <f:validateLength minimum="5" maximum="50"  />
+                                    </h:inputText>
+                                    <h:message for="inputText11"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <h:inputSecret p:placeholder="Indtast Password" value="#{user.password}" styleClass="Login_input" />
+                                    <h:inputSecret id="inputText22" p:placeholder="Indtast Password" value="#{user.password}" styleClass="Login_input"  validatorMessage="#{user.invalidLengthPassword}" required="true">
+                                        <f:validateLength minimum="5" maximum="50"/>
+                                    </h:inputSecret>
+                                    <h:message for="inputText22"/>
                                 </td>
                             </tr>
                             <tr>

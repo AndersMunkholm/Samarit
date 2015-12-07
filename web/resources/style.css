@@ -67,7 +67,7 @@ li {
     #logo{
         height: 60px;
         width: 60px;
-        background-image: url("images/logo.png"); 
+        background-image: url("logo.png"); 
     }
 #topbar_menu {
     width: 79%;
@@ -189,7 +189,7 @@ li {
     height: 408px;
     margin-left: auto;
     margin-right: auto;
-    background-image: url("images/login_img.jpg");
+    background-image: url("login_img.jpg");
     background-repeat: none;
 }
 .loginForm {
@@ -278,7 +278,7 @@ li {
 .errorImage {
     width: 354px;
     height: 408px;
-    background-image: url("images/errorpage.PNG");
+    background-image: url("errorpage.PNG");
     float: left;
 }
 .errorText {
