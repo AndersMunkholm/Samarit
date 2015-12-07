@@ -21,7 +21,7 @@ and open the template in the editor.
     <div id="loggedIn_menu">
         <h:body rendered="#{user.loggedIn()}">            
             <div id="topbar_menu">                             
-                <ul id="navigation" class="hover">
+                
 
                     <a href="#">
 
@@ -32,7 +32,7 @@ and open the template in the editor.
                                     <div id="myDropdown" class="dropdown-content">
                                         <a onclick="" href="samaritPage.xhtml">Samariter</a>
                                         <a onclick="" href="events.xhtml">Events</a>
-                                            <!--LAV ORDENTLIG NAVIGATION DETTE ER IKKE PÆNT-->
+                                            
                                     </div>
 
                                 </div>
@@ -54,46 +54,23 @@ and open the template in the editor.
                     </a> 
 
                     
-                </ul>
+                
             </div>
 
             <div class="topbar_userstatus">
-                <ul id="user_options" class="hover">
-                    <li  class="menuItem2">
-                        <a href="userPage.xhtml">
-                            <h2 class="menuItem_text2">
-                                Velkommen <login1>#{user.firstName}</login1> ⇓
-                            </h2>
-                        </a>
-                        
-                           <div class="dropdown">
-                                    <button onclick="getDropdownContent()" class="dropbtn">Dropdown</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <a onclick="" href="samaritPage.xhtml">Samariter</a>
-                                        <a onclick="" href="events.xhtml">Events</a>
-                                            <!--LAV ORDENTLIG NAVIGATION DETTE ER IKKE PÆNT-->
+                <table>
+                            <div class="dropdown2">
+                                    <button onclick="getDropdownContent2()" class="dropbtn2">Velkommen #{user.firstName} ⇓</button>
+                                    <div id="myDropdown2" class="dropdown-content2">
+                                        <a onclick=""   href="userPage.xhtml">Profil</a>
+                                        <a onclick="" href="login.xhtml">Logout</a>
+                                            
                                     </div>
 
                            </div>
-                        <!-- Contains the navigation Dropdown list-->
-<!--                        <ul class="dropdoen_list">
-                            <li class="menuItem_dropDown2">
-                                <table style="width:100%; border: solid 1px green; ">
-                                    <tr>
-                                        <td style="width:50%; border: solid 1px red; ">
-                                            <a href="userPage.xhtml">Profil</a>
-                                        </td>
-                                        <td style="width:50%; border: solid 1px red;">
-                                            <h:button styleClass="logout_Button" value = "Logud" outcome="login" />
-                                        </td>
-                                    </tr>
-                                </table>   
-                                
-                            </li>
-
-                        </ul> -->
-                    </li>
-                </ul>
+                 
+                   
+                </table>
             </div>
             <script src="resources/dropdown.js"></script>
             
