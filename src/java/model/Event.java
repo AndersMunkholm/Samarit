@@ -115,7 +115,10 @@ public class Event {
         
         JSONFRAMES = JSONFRAMES.substring(0, JSONFRAMES.length()-1) + " ]";
         
-        JSON =  " { " + " \"Name\": \"" + this.name+ "\", \"StartDate\": \"" + this.startDate + "\", \"EndDate\": \"" + this.endDate + "\", \"EventFrames\": " + JSONFRAMES + " }";
+        JSON =  " { " + " \"Name\": \"" + this.name+ "\", \"StartDate\": \"" 
+                + this.startDate + "\", \"EndDate\": \"" 
+                + this.endDate + "\", \"EventFrames\": " 
+                + JSONFRAMES + " }";
         
         
         return JSON;

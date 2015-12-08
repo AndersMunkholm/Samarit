@@ -344,7 +344,7 @@ public class Database {
         while (res.next()) {
             
             this.events.add(new Event(
-                    res.getString("eventId")
+                     res.getString("eventId")
                     ,res.getString("name")
                     ,format.parse(res.getString("beginTime"))
                     ,format.parse(res.getString("endTime"))));
